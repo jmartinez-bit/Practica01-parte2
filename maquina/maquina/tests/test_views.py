@@ -12,7 +12,7 @@ class ViewsTestCase(TestCase):
 class ExpendTestCase(unittest.TestCase):
     def test_saldo_rest(self):
         result = expendedora.views.saldo_rest(1, 4)
-        comp_1 = 'El saldo restante es: 0\nGracias por la compra !!!'
+        comp_1 = 'El saldo restante es: 0 Gracias por la compra !!!'
         comp_2 = 'No tiene el monto para el producto seleccionado'
         self.assertEqual(result, comp_2)
 

@@ -1,4 +1,4 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from django.urls import reverse
 from django.http import HttpResponse, HttpResponseRedirect
 
@@ -13,9 +13,16 @@ def index(request):
 def enviar(request):
     saldo = request.POST['saldo']
     codigo = request.POST['codigo']
-    producto = opc(codigo)
-    context = saldo_rest(saldo, producto.precio)
-    return HttpResponse(context)
+    try:
+        producto = opc(codigo)
+        context = saldo_rest(saldo, producto.precio)
+
+        return HttpResponse(context)
+
+    except AttributeError:
+        return redirect('expendedora:index')
+    except ValueError:
+        return redirect('expendedora:index')
 
 def saldo_rest(saldo, costo):
     saldo = float(saldo)
@@ -26,16 +33,17 @@ def saldo_rest(saldo, costo):
         return msj
     else:
         restante = saldo-costo
-        msj = 'El saldo restante es: ' + str(restante) +'\nGracias por la compra !!!'
+        msj = 'El saldo restante es: ' + str(restante) + ' Gracias por la compra !!!'
         return msj
 
 def opc(opc):
     opc = int(opc)
-    if opc>=1 and opc<=10:
-        producto = Productos.objects.get(id=opc)
-        return producto
 
-
+    try:
+        if opc>=1 and opc<=10:
+            producto = Productos.objects.get(id=opc)
+            return producto
+    except ValueError:
+        return redirect('expendedora:index')
     else:
-        msj = 'La opcion ingresada es incorrecta'
-        return msj
+        return redirect('expendedora:index')
