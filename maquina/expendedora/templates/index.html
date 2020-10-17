@@ -5,23 +5,52 @@
 {% endblock title %}
 
 {% block body %}
-    <div class="container text-center">
-        <h1 class="my-2">La Máquina Expendedora</h1>
-        <table class="table my-4">
-            <thead>
-                <tr>
-                    <th scope="col">Producto</th>
-                    <th scope="col">Precio</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for producto in productos %}
-                <tr>
-                    <th scope="row">{{ producto.nombre }}</th>
-                    <td>{{ producto.precio }}</td>
-                </tr>
-                {% endfor %}
-            </tbody>
-            </table>
+    <div class="container text-center bg-light">
+        <div class="row">
+            <div class="col-12">
+                <h1 class="my-2">La Máquina Expendedora</h1>
+            </div>
+            <div class="col-4">
+                <h2>Lista de productos</h2>
+                <table class="table my-4">
+                    <thead>
+                        <tr>
+                            <th scope="col h3">Producto</th>
+                            <th scope="col h3">Precio</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for producto in productos %}
+                        <tr>
+                            <th scope="row">{{ producto.nombre }}</th>
+                            <td>{{ producto.precio }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-6">
+                <h2>Ingreso</h2>
+                <form method="POST" action="">
+                    <div class="row">
+                        {% csrf_token %}
+                        <div class="col form-group">
+                            <label for="prod">Código de producto</label>
+                            <input type="text" class="form-control" id="prod">
+                        </div>
+                        <div class="col form-group">
+                            <label for="sald">Saldo</label>
+                            <input type="text" class="form-control" id="sald" placeholder="999.50">
+                        </div>
+                    </div>
+                    <input class="btn btn-outline-primary" type="submit" value="Enviar">
+                </form>
+            </div>
+            <div class="col-4">
+                <h2>Salida</h2>
+
+            </div>
+        </div>
     </div>
+
 {% endblock body %}
