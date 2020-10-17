@@ -15,3 +15,9 @@ class ExpendTestCase(unittest.TestCase):
         comp_1 = 'El saldo restante es: 0\nGracias por la compra !!!'
         comp_2 = 'No tiene el monto para el producto seleccionado'
         self.assertEqual(result, comp_2)
+
+    def test_opc(self):
+        result = expendedora.views.opc(1)
+        result = [result.pk, result.nombre, result.precio] 
+        comp = [1, 'Papa', 2.50]
+        self.assertEqual(result, comp)

@@ -18,3 +18,27 @@ def saldo_rest(saldo, costo):
         restante = saldo-costo
         msj = 'El saldo restante es: ' + str(restante) +'\nGracias por la compra !!!'
         return msj
+
+
+def opc(opc):
+    if opc>=1 and opc<=10:
+        i = 1
+        while i <=10:
+            if int(opc) == i:
+                producto = Productos.objects.get(id=i)
+                return producto
+
+    else:
+        msj = 'La opcion ingresada es incorrecta'
+        return msj
+
+'''
+def productos():
+    lista = []
+    i = 1
+    while i <=10:
+        producto = Productos.objects.get(id=i)
+        lista.append(producto)
+        i += 1
+    print(lista[0].precio)
+'''
