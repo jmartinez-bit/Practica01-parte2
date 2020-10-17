@@ -5,5 +5,6 @@ app_name = "expendedora"
 
 urlpatterns = [
     path('', views.index, name='index'),
+    path('enviar/', views.enviar, name='enviar'),
     
 ]

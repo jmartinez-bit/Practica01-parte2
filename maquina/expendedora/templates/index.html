@@ -33,16 +33,16 @@
             </div>
             <div class="col-6">
                 <h2>Ingreso</h2>
-                <form method="POST" action="{% url 'expendedora:index' %}">
+                <form method="POST" action="{% url 'expendedora:enviar' %}">
                     <div class="row">
                         {% csrf_token %}
                         <div class="col form-group">
                             <label for="prod">Código de producto</label>
-                            <input type="text" class="form-control" id="prod">
+                            <input type="text" class="form-control" id="prod" name="codigo">
                         </div>
                         <div class="col form-group">
                             <label for="sald">Saldo</label>
-                            <input type="text" class="form-control" id="sald" placeholder="999.50">
+                            <input type="text" class="form-control" id="sald" name="saldo" placeholder="999.50">
                         </div>
                     </div>
                     <input class="btn btn-outline-primary" type="submit" value="Enviar">

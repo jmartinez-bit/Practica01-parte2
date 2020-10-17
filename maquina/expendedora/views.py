@@ -10,7 +10,17 @@ def index(request):
     context = {'productos':productos}
     return render(request, 'index.html', context)
 
+def enviar(request):
+    saldo = request.POST['saldo']
+    codigo = request.POST['codigo']
+    producto = opc(codigo)
+    context = saldo_rest(saldo, producto.precio)
+    return HttpResponse(context)
+
 def saldo_rest(saldo, costo):
+    saldo = float(saldo)
+    costo = float(costo)
+    
     if saldo < costo:
         msj = 'No tiene el monto para el producto seleccionado'
         return msj
@@ -19,26 +29,13 @@ def saldo_rest(saldo, costo):
         msj = 'El saldo restante es: ' + str(restante) +'\nGracias por la compra !!!'
         return msj
 
-
 def opc(opc):
+    opc = int(opc)
     if opc>=1 and opc<=10:
-        i = 1
-        while i <=10:
-            if int(opc) == i:
-                producto = Productos.objects.get(id=i)
-                return producto
+        producto = Productos.objects.get(id=opc)
+        return producto
+
 
     else:
         msj = 'La opcion ingresada es incorrecta'
         return msj
-
-'''
-def productos():
-    lista = []
-    i = 1
-    while i <=10:
-        producto = Productos.objects.get(id=i)
-        lista.append(producto)
-        i += 1
-    print(lista[0].precio)
-'''
