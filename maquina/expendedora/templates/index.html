@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block title %}
+    Máquina Expendedora
+{% endblock title %}
+
+{% block body %}
+    <div class="container text-center">
+        <h1 class="my-2">La Máquina Expendedora</h1>
+        <table class="table my-4">
+            <thead>
+                <tr>
+                    <th scope="col">Producto</th>
+                    <th scope="col">Precio</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for producto in productos %}
+                <tr>
+                    <th scope="row">{{ producto.nombre }}</th>
+                    <td>{{ producto.precio }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+            </table>
+    </div>
+{% endblock body %}
